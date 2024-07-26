@@ -1,10 +1,10 @@
 package com.flutter.reverse_timer
 
 import android.widget.Toast
+import android.graphics.Color
+import android.widget.TextView
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.os.Handler
-import android.os.Looper
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -55,5 +55,9 @@ class MainActivity : FlutterActivity() {
         )
         datePickerDialog.datePicker.minDate = today.timeInMillis
         datePickerDialog.show()
+
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE)?.setTextColor(Color.GRAY)
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE)?.setTextColor(Color.RED)
+
     }
-}
+    }

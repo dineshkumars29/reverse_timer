@@ -11,6 +11,7 @@ class ReverseTimerController extends GetxController{
   RxString remainingTime = "".obs;
   Timer? timer;
   RxBool isLoading = false.obs;
+  // RxBool isButtonDisabled = false.obs;
 
   // Rxn<DateTime> selectedDate = Rxn<DateTime>();
   // Rx<Duration> remainingTime = Duration.zero.obs;
