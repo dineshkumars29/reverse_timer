@@ -58,10 +58,13 @@ class ReverseTimerScreen extends GetView<ReverseTimerController> {
                 ),
                 SizedBox(height: 20.h),
                 controller.remainingTime.value.isNotEmpty
-                    ? Text(
-                        'Time remaining: ${controller.remainingTime.toString().split('.').first}',
-                        style: TextStyle(fontSize: 24.sp),
-                      )
+                    ? SizedBox(
+                      width: 0.8.sw,
+                      child: Text(
+                          'Time remaining: ${controller.remainingTime.toString().split('.').first}',
+                          style: TextStyle(fontSize: 24.sp),textAlign: TextAlign.center,
+                        ),
+                    )
                       : Container(),
                 SizedBox(height: 20.h),
                 controller.selectedDate.value.isEmpty
