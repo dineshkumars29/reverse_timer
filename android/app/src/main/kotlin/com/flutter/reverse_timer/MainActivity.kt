@@ -1,8 +1,7 @@
 package com.flutter.reverse_timer
 
-import android.widget.Toast
+//import android.widget.Toast
 import android.graphics.Color
-import android.widget.TextView
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import androidx.annotation.NonNull
@@ -38,7 +37,7 @@ class MainActivity : FlutterActivity() {
 
         today.add(Calendar.DAY_OF_YEAR, 1)
 
-        Toast.makeText(this, "Please select a future date", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, "Please select a future date", Toast.LENGTH_LONG).show()
 
         val datePickerDialog = DatePickerDialog(
             this,
