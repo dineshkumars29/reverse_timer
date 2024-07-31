@@ -41,12 +41,13 @@ class ReverseTimerScreen extends GetView<ReverseTimerController> {
                 SizedBox(height: 20.h),
                 controller.selectedDate.value.isEmpty
                     ? SizedBox(
-                      width: 0.7.sw,
-                      child: const Text(textAlign: TextAlign.center,
+                        width: 0.7.sw,
+                        child: const Text(
+                          textAlign: TextAlign.center,
                           "Please pick a future date from the options below",
                           style: TextStyle(color: Colors.red),
                         ),
-                    )
+                      )
                     : Text(
                         "${DateTime.parse(controller.selectedDate.value).day.toString().padLeft(2, '0')}-${DateTime.parse(controller.selectedDate.value).month.toString().padLeft(2, '0')}-${DateTime.parse(controller.selectedDate.value).year.toString()}",
                         style: TextStyle(fontSize: 16.sp),
@@ -59,13 +60,14 @@ class ReverseTimerScreen extends GetView<ReverseTimerController> {
                 SizedBox(height: 20.h),
                 controller.remainingTime.value.isNotEmpty
                     ? SizedBox(
-                      width: 0.8.sw,
-                      child: Text(
+                        width: 0.8.sw,
+                        child: Text(
                           'Time remaining: ${controller.remainingTime.toString().split('.').first}',
-                          style: TextStyle(fontSize: 24.sp),textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 24.sp),
+                          textAlign: TextAlign.center,
                         ),
-                    )
-                      : Container(),
+                      )
+                    : Container(),
                 SizedBox(height: 20.h),
                 controller.selectedDate.value.isEmpty
                     ? Container()
@@ -74,11 +76,10 @@ class ReverseTimerScreen extends GetView<ReverseTimerController> {
                             backgroundColor: controller.isLoading.value
                                 ? WidgetStateProperty.all<Color>(Colors.green)
                                 : WidgetStateProperty.all<Color>(Colors.black)),
-                        onPressed: () => controller.calculateRemainingTime(),
+                        onPressed: () => controller.startTimerStream(),
                         child: const Text('Calculate Time Remaining',
                             style: TextStyle(color: Colors.white)),
                       ),
-                
                 SizedBox(height: 30.h),
               ],
             );
