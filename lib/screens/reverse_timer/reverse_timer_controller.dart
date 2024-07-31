@@ -6,10 +6,11 @@ import 'package:get/get.dart';
 class ReverseTimerController extends GetxController{
 
   static const methodChannel = MethodChannel('dateHandlerChannel');
+  static const eventChannel = EventChannel('timerStreamChannel');
   
   RxString selectedDate = "".obs;
   RxString remainingTime = "".obs;
-  Timer? timer;
+  // Timer? timer;
   RxBool isLoading = false.obs;
   // RxBool isButtonDisabled = false.obs;
 
@@ -19,16 +20,33 @@ class ReverseTimerController extends GetxController{
   // DateTime? selectedDate;
   // Duration? remainingTime;
 
+  StreamSubscription? subscription;
+
   @override
   void onInit() {
     selectDate();
     super.onInit();
   }
+
+    void startTimerStream() {
+    subscription?.cancel();
+    subscription = eventChannel.receiveBroadcastStream().listen((data) {
+      remainingTime.value = data;
+      if (data == "Time's up!") {
+        subscription?.cancel();
+      }
+    }, onError: (error) {
+      print("Error: $error");
+    }, onDone: () {
+      isLoading.value = false;
+    });
+  }
   
     Future<void> selectDate() async {
     try {
       final String result = await methodChannel.invokeMethod('selectDate');
-        timer?.cancel();
+        // timer?.cancel();
+        subscription?.cancel();
         remainingTime.value = Duration.zero.toString();
         selectedDate.value = DateTime.parse(result).toString();
         isLoading.value = true;
@@ -37,18 +55,9 @@ class ReverseTimerController extends GetxController{
     }
   }
 
-    void calculateRemainingTime() {
-    if (selectedDate.value != "") {
-        remainingTime.value = DateTime.parse(selectedDate.value).difference(DateTime.now()).toString();
-      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-          remainingTime.value = DateTime.parse(selectedDate.value).difference(DateTime.now()).toString();
-      });
-      isLoading.value = false;
-    }
-  }
  @override
   void dispose() {
-    timer?.cancel();
+    subscription?.cancel();
     super.dispose();
   }
 }
